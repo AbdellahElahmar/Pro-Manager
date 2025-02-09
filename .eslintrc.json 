@@ -1,0 +1,22 @@
+{
+  "root": true,
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "prettier"
+      ],
+      "rules": {
+        "@angular-eslint/component-class-suffix": ["error", { "suffixes": ["Component"] }],
+        "@angular-eslint/directive-class-suffix": ["error", { "suffixes": ["Directive"] }],
+        "prettier/prettier": "error"
+      }
+    }
+  ]
+}
