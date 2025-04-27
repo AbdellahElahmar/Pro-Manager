@@ -4,6 +4,7 @@ import {MatFormField} from '@angular/material/form-field';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {MatInput} from '@angular/material/input';
+import {AuthService} from '../../../core/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,11 @@ export class LoginComponent implements OnInit{
   @Output() submitEM = new EventEmitter();
   form!: FormGroup
 
+  constructor(
+    private authService: AuthService
+  ) {
+  }
+
   ngOnInit() {
     this.form = new FormGroup({
       username: new FormControl(''),
@@ -34,7 +40,10 @@ export class LoginComponent implements OnInit{
 
   submit() {
     if (this.form.valid) {
-      this.submitEM.emit(this.form.value);
+      this.authService.addUser(this.form.value)
+        .subscribe(next => {
+          console.log("success")
+        })
     }
   }
 
