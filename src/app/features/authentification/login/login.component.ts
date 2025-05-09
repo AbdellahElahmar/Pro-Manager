@@ -5,6 +5,8 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {MatInput} from '@angular/material/input';
 import {AuthService} from '../../../core/auth.service';
+import {RegisterFormComponent} from '../register-form/register-form.component';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +17,16 @@ import {AuthService} from '../../../core/auth.service';
     ReactiveFormsModule,
     MatCardTitle,
     NgIf,
-    MatInput
+    MatInput,
+    RegisterFormComponent,
+    MatButton
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
   @Input() error: string | null | undefined;
+  showRegister: Boolean = false
 
   @Output() submitEM = new EventEmitter();
   form!: FormGroup
@@ -39,12 +44,18 @@ export class LoginComponent implements OnInit{
   }
 
   submit() {
+    console.log("test")
     if (this.form.valid) {
       this.authService.addUser(this.form.value)
         .subscribe(next => {
           console.log("success")
         })
     }
+  }
+
+  showRegisterForm(isShow: boolean) {
+    console.log("test")
+    this.showRegister = isShow
   }
 
 }
